@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class AddExpenses extends StatelessWidget {
-  const AddExpenses({super.key});
+  const AddExpenses({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Agregar Gasto'),
+      ),
+      body: const Center(
         child: Text('Hola Gastos'),
       ),
     );
