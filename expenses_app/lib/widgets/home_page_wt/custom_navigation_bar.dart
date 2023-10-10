@@ -7,9 +7,10 @@ class CustomNavigationBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uiProvider = Provider.of<UIProvider>(context);
-    final watchIndex = context.watch<UIProvider>();
-    final read = context.read<UIProvider>();
+    final uiProvider = Provider.of<UIProvider>(
+      context,
+    );
+
     return BottomNavigationBar(
       currentIndex: uiProvider.bnbIndex,
       onTap: (int i) => uiProvider.bnbIndex = i,

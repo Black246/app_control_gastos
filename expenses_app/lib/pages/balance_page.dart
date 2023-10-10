@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:expenses_app/widgets/home_page_wt/balance_page_wt/back_sheet.dart';
+import 'package:expenses_app/widgets/home_page_wt/balance_page_wt/custom_fab.dart';
 import 'package:expenses_app/widgets/home_page_wt/balance_page_wt/fron_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,41 +43,44 @@ class _BalancePageState extends State<BalancePage> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _scrollController,
-      slivers: [
-        SliverAppBar(
-          elevation: 0.0,
-          expandedHeight: 120.0,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  '\$ 2,500.000',
-                  style: TextStyle(fontSize: 30.0, color: Colors.green),
-                ),
-                Text(
-                  'Balance',
-                  style: TextStyle(fontSize: 14.0),
+    return Scaffold(
+      floatingActionButton: const CustomFAB(),
+      body: CustomScrollView(
+        controller: _scrollController,
+        slivers: [
+          SliverAppBar(
+            elevation: 0.0,
+            expandedHeight: 120.0,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text(
+                    '\$ 2,500.000',
+                    style: TextStyle(fontSize: 30.0, color: Colors.green),
+                  ),
+                  Text(
+                    'Balance',
+                    style: TextStyle(fontSize: 14.0),
+                  )
+                ],
+              ),
+            ),
+          ),
+          SliverList(
+              delegate: SliverChildListDelegate([
+            Stack(
+              children: [
+                const BackSheet(),
+                Padding(
+                  padding: EdgeInsets.only(top: _max),
+                  child: const FrontSheet(),
                 )
               ],
             ),
-          ),
-        ),
-        SliverList(
-            delegate: SliverChildListDelegate([
-          Stack(
-            children: [
-              const BackSheet(),
-              Padding(
-                padding: EdgeInsets.only(top: _max),
-                child: const FrontSheet(),
-              )
-            ],
-          ),
-        ]))
-      ],
+          ]))
+        ],
+      ),
     );
   }
 }
