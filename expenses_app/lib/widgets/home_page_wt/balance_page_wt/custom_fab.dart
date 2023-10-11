@@ -1,4 +1,6 @@
+import 'package:expenses_app/pages/add_entries.dart';
 import 'package:expenses_app/pages/add_expense.dart';
+import 'package:expenses_app/utils/page_animation_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
@@ -17,27 +19,8 @@ class CustomFAB extends StatelessWidget {
         onTap: () {
           Navigator.push(
               context,
-              PageRouteBuilder(
-                  transitionDuration: const Duration(milliseconds: 400),
-                  transitionsBuilder: (BuildContext context,
-                      Animation<double> animation,
-                      Animation<double> secAnimation,
-                      Widget child) {
-                    animation = CurvedAnimation(
-                        parent: animation, curve: Curves.easeOutBack);
-                    return ScaleTransition(
-                      alignment: const Alignment(0.8, 0.8),
-                      scale: animation,
-                      child: child,
-                    );
-                  },
-                  pageBuilder: (
-                    BuildContext context,
-                    Animation<double> animation,
-                    Animation<double> secAnimation,
-                  ) {
-                    return const AddExpenses();
-                  }));
+              PagesAnimationRoutes(
+                  widget: const AddExpenses(), ejex: 0.8, ejey: 0.8));
         }));
 
     childButtons.add(SpeedDialChild(
@@ -47,7 +30,9 @@ class CustomFAB extends StatelessWidget {
         labelStyle: const TextStyle(fontSize: 18.0),
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const AddExpenses()));
+              context,
+              PagesAnimationRoutes(
+                  widget: const AddEntries(), ejex: 0.8, ejey: 0.8));
         }));
 
     return SpeedDial(
