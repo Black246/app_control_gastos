@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:expenses_app/widgets/home_page_wt/balance_page_wt/back_sheet.dart';
-import 'package:expenses_app/widgets/home_page_wt/balance_page_wt/custom_fab.dart';
-import 'package:expenses_app/widgets/home_page_wt/balance_page_wt/fron_sheet.dart';
+import 'package:expenses_app/interface/widgets/home_page_wt/balance_page_wt/back_sheet.dart';
+import 'package:expenses_app/interface/widgets/home_page_wt/balance_page_wt/custom_fab.dart';
+import 'package:expenses_app/interface/widgets/home_page_wt/balance_page_wt/fron_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

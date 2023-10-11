@@ -1,5 +1,5 @@
-import 'package:expenses_app/pages/add_entries.dart';
-import 'package:expenses_app/pages/add_expense.dart';
+import 'package:expenses_app/interface/pages/add_entries.dart';
+import 'package:expenses_app/interface/pages/add_expense.dart';
 import 'package:expenses_app/utils/page_animation_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
