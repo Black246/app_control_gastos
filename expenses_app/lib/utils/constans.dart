@@ -9,7 +9,7 @@ class Constants {
             topLeft: Radius.circular(30.0), topRight: Radius.circular(30.0)));
   }
 
-  static customButtom(Color decoration, Color border, String _text) {
+  static customButtom(Color decoration, Color border, String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -21,7 +21,7 @@ class Constants {
             ),
             borderRadius: BorderRadius.circular(25.0)),
         child: Center(
-          child: Text(_text),
+          child: Text(text),
         ),
       ),
     );

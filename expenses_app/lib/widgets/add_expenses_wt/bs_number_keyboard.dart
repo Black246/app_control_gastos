@@ -37,19 +37,19 @@ class _BSNumberKeyboardState extends State<BSNumberKeyboard> {
 
   _numPad() {
     if (import == '0.00') import = '';
-    _number(String _text, double _heigth) {
+    number(String text, double heigth) {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
           setState(() {
-            import += _text;
+            import += text;
           });
         },
         child: SizedBox(
-          height: _heigth,
+          height: heigth,
           child: Center(
             child: Text(
-              _text,
+              text,
               style: const TextStyle(fontSize: 35.0),
             ),
           ),
@@ -80,35 +80,35 @@ class _BSNumberKeyboardState extends State<BSNumberKeyboard> {
                             /*color: Colors.grey,*/ width: 0.1)),
                     children: [
                       TableRow(children: [
-                        _number(
+                        number(
                           '1',
                           heigth,
                         ),
-                        _number('2', heigth),
-                        _number('3', heigth)
+                        number('2', heigth),
+                        number('3', heigth)
                       ]),
                       TableRow(children: [
-                        _number(
+                        number(
                           '4',
                           heigth,
                         ),
-                        _number('5', heigth),
-                        _number('6', heigth)
+                        number('5', heigth),
+                        number('6', heigth)
                       ]),
                       TableRow(children: [
-                        _number(
+                        number(
                           '7',
                           heigth,
                         ),
-                        _number('8', heigth),
-                        _number('9', heigth)
+                        number('8', heigth),
+                        number('9', heigth)
                       ]),
                       TableRow(children: [
-                        _number(
+                        number(
                           '.',
                           heigth,
                         ),
-                        _number('0', heigth),
+                        number('0', heigth),
                         GestureDetector(
                           onTap: () {
                             setState(() {
