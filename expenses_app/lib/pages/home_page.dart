@@ -1,9 +1,9 @@
-import 'package:expenses_app/interface/pages/balance_page.dart';
-import 'package:expenses_app/interface/pages/charts_page.dart';
+import 'package:expenses_app/pages/balance_page.dart';
+import 'package:expenses_app/pages/charts_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../providers/ui_provider.dart';
+import '../providers/ui_provider.dart';
 import '../widgets/home_page_wt/custom_navigation_bar.dart';
 
 class HomePage extends StatelessWidget {

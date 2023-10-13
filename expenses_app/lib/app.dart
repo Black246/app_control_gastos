@@ -1,5 +1,5 @@
-import 'package:expenses_app/interface/pages/add_expense.dart';
-import 'package:expenses_app/interface/pages/home_page.dart';
+import 'package:expenses_app/pages/add_expense.dart';
+import 'package:expenses_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -22,7 +22,6 @@ class MyApp extends StatelessWidget {
       initialRoute: 'home',
       routes: {
         'home': (_) => const HomePage(),
-        'addEntries': (_) => const AddExpenses()
       },
     );
   }
