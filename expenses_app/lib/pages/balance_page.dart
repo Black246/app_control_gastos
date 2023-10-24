@@ -48,13 +48,13 @@ class _BalancePageState extends State<BalancePage> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          SliverAppBar(
+          const SliverAppBar(
             elevation: 0.0,
             expandedHeight: 120.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     '\$ 2,500.000',
                     style: TextStyle(fontSize: 30.0, color: Colors.green),

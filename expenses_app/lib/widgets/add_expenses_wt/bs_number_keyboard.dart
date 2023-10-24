@@ -1,22 +1,30 @@
-import 'package:expenses_app/utils/constans.dart';
+import 'package:expenses_app/models/combined_model.dart';
+import 'package:expenses_app/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-class BSNumberKeyboard extends StatefulWidget {
-  const BSNumberKeyboard({super.key});
+class BSNumKeyboard extends StatefulWidget {
+  final CombinedModel cModel;
+  const BSNumKeyboard({Key? key, required this.cModel}) : super(key: key);
 
   @override
-  State<BSNumberKeyboard> createState() => _BSNumberKeyboardState();
+  _BSNumKeyboardState createState() => _BSNumKeyboardState();
 }
 
-class _BSNumberKeyboardState extends State<BSNumberKeyboard> {
+class _BSNumKeyboardState extends State<BSNumKeyboard> {
   String import = '0.00';
 
   @override
+  void initState() {
+    import = widget.cModel.amount.toStringAsFixed(2);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // funcion para detectar cuando hay mas de 3 digitod y pone una coma
     String Function(Match) mathFunc;
     RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
     mathFunc = (Match match) => '${match[1]},';
+
     return GestureDetector(
       onTap: () {
         _numPad();
@@ -41,31 +49,39 @@ class _BSNumberKeyboardState extends State<BSNumberKeyboard> {
 
   _numPad() {
     if (import == '0.00') import = '';
-    number(String text, double heigth) {
+
+    _expenseChange(String amount) {
+      if (amount == '') amount = '0.00';
+      widget.cModel.amount = double.parse(amount);
+    }
+
+    _num(String _text, double _height) {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
           setState(() {
-            import += text;
+            import += _text;
+            widget.cModel.amount = double.parse(import);
           });
         },
         child: SizedBox(
-          height: heigth,
-          child: Center(
-            child: Text(
-              text,
-              style: const TextStyle(fontSize: 35.0),
-            ),
-          ),
-        ),
+            height: _height,
+            child: Center(
+              child: Text(
+                _text,
+                style: const TextStyle(
+                  fontSize: 35.0,
+                ),
+              ),
+            )),
       );
     }
 
     showModalBottomSheet(
         barrierColor: Colors.transparent,
-        isScrollControlled: true,
         isDismissible: false,
         enableDrag: false,
+        isScrollControlled: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(30.0))),
@@ -76,102 +92,95 @@ class _BSNumberKeyboardState extends State<BSNumberKeyboard> {
             child: SizedBox(
               height: 350.0,
               child: LayoutBuilder(
-                  builder: (BuildContext context, BoxConstraints constraints) {
-                var heigth = constraints.biggest.height / 5;
-                return Column(
-                  children: [
-                    Table(
-                      border: TableBorder.symmetric(
-                          inside: const BorderSide(
-                              /*color: Colors.grey,*/ width: 0.1)),
-                      children: [
-                        TableRow(children: [
-                          number(
-                            '1',
-                            heigth,
+                builder: (BuildContext context, BoxConstraints constraints) {
+                  var _height = constraints.biggest.height / 5;
+                  return Column(
+                    children: [
+                      Table(
+                        border: TableBorder.symmetric(
+                            inside: const BorderSide(
+                                // color: Colors.grey,
+                                width: 0.1)),
+                        children: [
+                          TableRow(children: [
+                            _num('1', _height),
+                            _num('2', _height),
+                            _num('3', _height),
+                          ]),
+                          TableRow(children: [
+                            _num('4', _height),
+                            _num('5', _height),
+                            _num('6', _height),
+                          ]),
+                          TableRow(children: [
+                            _num('7', _height),
+                            _num('8', _height),
+                            _num('9', _height),
+                          ]),
+                          TableRow(children: [
+                            _num('.', _height),
+                            _num('0', _height),
+                            GestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              onTap: () {
+                                setState(() {
+                                  if (import.length > 0.0) {
+                                    import =
+                                        import.substring(0, import.length - 1);
+                                    _expenseChange(import);
+                                  }
+                                });
+                              },
+                              onLongPress: () {
+                                setState(() {
+                                  import = '';
+                                  _expenseChange(import);
+                                });
+                              },
+                              child: SizedBox(
+                                  height: _height,
+                                  child: const Icon(
+                                    Icons.backspace,
+                                    size: 35.0,
+                                  )),
+                            )
+                          ]),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: GestureDetector(
+                              child: Constants.customButton(
+                                  Colors.transparent, Colors.red, 'Cancelar'),
+                              onTap: () {
+                                setState(() {
+                                  import = '0.00';
+                                  _expenseChange(import);
+                                  Navigator.pop(context);
+                                });
+                              },
+                            ),
                           ),
-                          number('2', heigth),
-                          number('3', heigth)
-                        ]),
-                        TableRow(children: [
-                          number(
-                            '4',
-                            heigth,
-                          ),
-                          number('5', heigth),
-                          number('6', heigth)
-                        ]),
-                        TableRow(children: [
-                          number(
-                            '7',
-                            heigth,
-                          ),
-                          number('8', heigth),
-                          number('9', heigth)
-                        ]),
-                        TableRow(children: [
-                          number(
-                            '.',
-                            heigth,
-                          ),
-                          number('0', heigth),
-                          GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              setState(() {
-                                if (import.length > 0.0) {
-                                  import =
-                                      import.substring(0, import.length - 1);
-                                }
-                              });
-                            },
-                            onLongPress: () {
-                              setState(() {
-                                import = '';
-                              });
-                            },
-                            child: SizedBox(
-                              height: heigth,
-                              child: const Icon(
-                                Icons.backspace,
-                                size: 35.0,
-                              ),
+                          Expanded(
+                            child: GestureDetector(
+                              child: Constants.customButton(
+                                  Colors.green, Colors.transparent, 'Aceptar'),
+                              onTap: () {
+                                setState(() {
+                                  if (import.length == 0.0) import = '0.00';
+                                  _expenseChange(import);
+                                  Navigator.pop(context);
+                                });
+                              },
                             ),
                           )
-                        ])
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GestureDetector(
-                            child: Constants.customButtom(
-                                Colors.transparent, Colors.red, 'Cancelar'),
-                            onTap: () {
-                              setState(() {
-                                import = '0.00';
-                                Navigator.pop(context);
-                              });
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            child: Constants.customButtom(
-                                Colors.transparent, Colors.green, 'Aceptar'),
-                            onTap: () {
-                              setState(() {
-                                if (import.length == 0.0) import = '0.00';
-                                Navigator.pop(context);
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                );
-              }),
+                        ],
+                      )
+                    ],
+                  );
+                },
+              ),
             ),
           );
         });
