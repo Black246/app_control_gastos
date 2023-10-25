@@ -8,8 +8,8 @@ class FeaturesModel {
     FeaturesModel({
         this.id,
         this.category = '',
-        this.color = '',
-        this.icon = '',
+        this.color = '#F02C2E',
+        this.icon = 'add_circle_outline',
     });
 
     int? id;

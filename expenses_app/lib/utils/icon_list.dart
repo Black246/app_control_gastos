@@ -95,5 +95,6 @@ class IconList {
     'local_florist_outlined'             : Icons.local_florist_outlined,
     'sports_bar_outlined'                : Icons.sports_bar_outlined,
     'home'                               : Icons.home,
+    'plus_one_outlined'                  : Icons.plus_one_outlined,
   };
 }

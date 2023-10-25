@@ -42,7 +42,7 @@ dependencies:
   flutter_speed_dial: ^7.0.0
   sqflite: ^2.0.2
   flutter_material_color_picker: ^1.2.0
-  fluttertoast: ^8.0.8
+  fluttertoast: ^8.2.2
 
 
 dev_dependencies:
