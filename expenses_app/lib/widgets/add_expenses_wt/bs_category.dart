@@ -1,8 +1,11 @@
+import 'package:expenses_app/models/features_model.dart';
+import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:expenses_app/utils/utils.dart';
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/category_list.dart';
+import 'package:provider/provider.dart';
 
 class BSCategory extends StatefulWidget {
   final CombinedModel cModel;
@@ -13,8 +16,24 @@ class BSCategory extends StatefulWidget {
 }
 
 class _BSCategoryState extends State<BSCategory> {
+  var catList = CategoryList().catList;
+
+  @override
+  void initState() {
+    var exProvider = context.read<ExpensesProvider>();
+
+    //if(exProvider.fList.isEmpty){
+      for(FeaturesModel e in catList){
+        exProvider.addNewFeature(e.category, e.color, e.icon);
+      }
+    //}
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
+    final featureList = context.watch<ExpensesProvider>().fList;
     bool hasData = false;
 
     if (widget.cModel.category != 'Selecciona Categoría') {
@@ -23,7 +42,7 @@ class _BSCategoryState extends State<BSCategory> {
 
     return GestureDetector(
       onTap: () {
-        _categorySelected();
+        _categorySelected(featureList);
       },
       child: Padding(
         padding: const EdgeInsets.all(18.0),
@@ -52,8 +71,8 @@ class _BSCategoryState extends State<BSCategory> {
     );
   }
 
-  _categorySelected() {
-    var catList = CategoryList().catList;
+  _categorySelected(List<FeaturesModel> fList ){
+    
 
     void _itemSelected(String category, String color) {
       setState(() {
@@ -67,9 +86,9 @@ class _BSCategoryState extends State<BSCategory> {
       ListView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          itemCount: catList.length,
+          itemCount: fList.length,
           itemBuilder: (_, i) {
-            var item = catList[i];
+            var item = fList[i];
             return ListTile(
               leading: Icon(
                 item.icon.toIcon(),
