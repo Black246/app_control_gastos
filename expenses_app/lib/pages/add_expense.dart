@@ -3,6 +3,7 @@ import 'package:expenses_app/widgets/add_expenses_wt/bs_category.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/bs_number_keyboard.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/comments_box.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/date_picker.dart';
+import 'package:expenses_app/widgets/add_expenses_wt/save_button.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constants.dart';
@@ -37,11 +38,9 @@ class AddExpenses extends StatelessWidget {
                   CommentBox(cModel: cModel),
                   Expanded(
                       child: Center(
-                          child: GestureDetector(
-                              onTap: () {
-                                print(cModel.amount);
-                              },
-                              child: const Text('Botón Guardar')))),
+                         child: SaveButton(cModel: cModel)
+                    )
+                  ),
                 ],
               ),
             ),
