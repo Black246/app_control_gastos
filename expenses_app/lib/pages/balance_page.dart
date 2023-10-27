@@ -1,8 +1,8 @@
 import 'dart:math';
-
 import 'package:expenses_app/widgets/balance_page_wt/back_sheet.dart';
 import 'package:expenses_app/widgets/balance_page_wt/custom_fab.dart';
-import 'package:expenses_app/widgets/balance_page_wt/fron_sheet.dart';
+import 'package:expenses_app/widgets/balance_page_wt/front_sheet.dart';
+import 'package:expenses_app/widgets/balance_page_wt/month_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -50,11 +50,12 @@ class _BalancePageState extends State<BalancePage> {
         slivers: [
           const SliverAppBar(
             elevation: 0.0,
-            expandedHeight: 120.0,
+            expandedHeight: 150.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  MonthSelector(),
                   Text(
                     '\$ 2,500.000',
                     style: TextStyle(fontSize: 30.0, color: Colors.green),
