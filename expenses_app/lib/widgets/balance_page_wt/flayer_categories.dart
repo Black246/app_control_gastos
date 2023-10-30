@@ -1,5 +1,6 @@
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
+import 'package:expenses_app/utils/math_operations.dart';
 import 'package:expenses_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -40,26 +41,35 @@ class FlayerCategories extends StatelessWidget {
               var item = gList[i];
               if (hasLimit == true) item = limitList[i];
 
-              return ListTile(
-                dense: true,
-                visualDensity: const VisualDensity(vertical: -2),
-                horizontalTitleGap: -8,
-                leading: Icon(
-                  item.icon.toIcon(),
-                  color: item.color.toColor(),
-                ),
-                title: Text(
-                  item.category,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis, // Pone 3 puntos cuando el texto es muy largo
-                  style: const TextStyle(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.bold
+              return GestureDetector(
+                onTap: (() {
+                  Navigator.pushNamed(
+                    context, 
+                    'cat_details',
+                    arguments: item
+                  );
+                }),
+                child: ListTile(
+                  dense: true,
+                  visualDensity: const VisualDensity(vertical: -2),
+                  horizontalTitleGap: -8,
+                  leading: Icon(
+                    item.icon.toIcon(),
+                    color: item.color.toColor(),
+                  ),
+                  title: Text(
+                    item.category,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis, // Pone 3 puntos cuando el texto es muy largo
+                    style: const TextStyle(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
+                  trailing: Text(
+                    getAmoutFormat(item.amount)
                   ),
                 ),
-                // trailing: Text(
-                //   getAmoutFormat(item.amount)
-                // ),
               );
             },
           ),

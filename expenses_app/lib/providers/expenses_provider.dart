@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:expenses_app/models/combined_model.dart';
+import 'package:expenses_app/models/entries_model.dart';
 import 'package:expenses_app/models/expenses_model.dart';
 import 'package:expenses_app/models/features_model.dart';
 import 'package:expenses_app/providers/db_expenses.dart';
@@ -12,12 +13,12 @@ class ExpensesProvider extends ChangeNotifier {
   List<FeaturesModel> fList = []; // Lista de categorias
   List<ExpensesModel> eList = []; // Lista de gastos
   List<CombinedModel> cList = []; // Listas combinadas
+  List<EntriesModel> etList = []; //Lista de ingresos
 
   //------------------ Funciones para insertar ----------------------------
 
   //Expenses
-  addNewExpense(CombinedModel cModel) async {
-    //Recibimos un combined model y lo transformamos a un Expenses model
+  addNewExpense(CombinedModel cModel) async { //Recibimos un combined model y lo transformamos a un Expenses model
     var expenses = ExpensesModel(
         link: cModel.link,
         day: cModel.day,
@@ -28,6 +29,20 @@ class ExpensesProvider extends ChangeNotifier {
     final id = await DBExpenses.db.addExpense(expenses);
     expenses.id = id; // Agregamos el id automaticamente
     eList.add(expenses);
+    notifyListeners();
+  }
+
+  //Entries
+  addNewEntries(CombinedModel cModel) async { //Recibimos un combined model y lo transformamos a un Expenses model
+    var entries = EntriesModel(
+        day: cModel.day,
+        month: cModel.month,
+        year: cModel.year,
+        comment: cModel.comment,
+        entries: cModel.amount);
+    final id = await DBExpenses.db.addEntries(entries);
+    entries.id = id; // Agregamos el id automaticamente
+    etList.add(entries);
     notifyListeners();
   }
 
@@ -46,6 +61,13 @@ class ExpensesProvider extends ChangeNotifier {
   getExpenseByDate(int month, int year) async {
     final response = await DBExpenses.db.getExpenseByDate(month, year);
     eList = [...response];
+    notifyListeners();
+  }
+
+  //Entries
+  getEntriesByDate(int month, int year) async {
+    final response = await DBExpenses.db.getEntriesByDate(month, year);
+    etList = [...response];
     notifyListeners();
   }
 
@@ -101,6 +123,7 @@ class ExpensesProvider extends ChangeNotifier {
               color: y.color,
               icon: y.icon,
               id: x.id,
+              link: x.link,
               comment: x.comment,
               amount: x.expense,
               day: x.day,

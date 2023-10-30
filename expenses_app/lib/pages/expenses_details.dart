@@ -1,9 +1,14 @@
+// En esta pagina mostramos los detalles de los gastos
+import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
+import 'package:expenses_app/providers/ui_provider.dart';
 import 'package:expenses_app/utils/constants.dart';
 import 'package:expenses_app/utils/math_operations.dart';
 import 'package:expenses_app/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ExpensesDetails extends StatefulWidget {
   const ExpensesDetails({super.key});
@@ -13,6 +18,7 @@ class ExpensesDetails extends StatefulWidget {
 }
 
 class _ExpensesDetailsState extends State<ExpensesDetails> {
+  List<CombinedModel> cList = [];
 
   final _scrollController = ScrollController();
   double _offset = 0;
@@ -26,6 +32,7 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
   @override
   void initState() {
     _scrollController.addListener(_listener);
+    cList = context.read<ExpensesProvider>().allItemsList;
     super.initState();
   }
 
@@ -39,9 +46,11 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
   @override
   Widget build(BuildContext context) {
     //Hacemos el llamado a nuestras listas
-    final exProvider = context.watch<ExpensesProvider>();
-    final cList = exProvider.allItemsList;
-    double totalExp = 0.0;
+     final exProvider = context.read<ExpensesProvider>();
+     final uiProvider = context.read<UIProvider>();
+     cList = context.watch<ExpensesProvider>().allItemsList;
+
+     double totalExp = 0.0;
 
     //Mapeamos mi cList y por cada elemento que venga de amount lo va a sumar; el valor inicail va a ser 0
     totalExp = cList.map((e) => e.amount).fold(0.0, (a , b) => a + b );
@@ -86,47 +95,85 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
           SliverList(delegate: SliverChildBuilderDelegate(
             (context, i) {
               var item = cList[i];
-            return ListTile(
-              leading: Stack(
-                alignment: AlignmentDirectional.center,
+            return Slidable(
+              key: ValueKey(item),
+              startActionPane: ActionPane(
+                motion: const DrawerMotion(),
                 children: [
-                  const Icon(
-                    Icons.calendar_today,
-                    // color: item.color.toColor(),
-                    size: 35.0,
+                  SlidableAction(
+                    onPressed: (context){
+                      setState(() {
+                        cList.removeAt(i);
+                      });
+                      exProvider.deleteExpense(item.id!);
+                      uiProvider.bnbIndex = 0; // Lo mandamos a la opcion 0 de home_page que es BalancePage para que refresque y se noten los cambios
+                      Fluttertoast.showToast(
+                        msg: '¡Gasto eliminado con exito!',
+                        backgroundColor: Colors.green
+                      );
+                    },
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete,
+                    label: 'Borrar',
                   ),
-                  Positioned(
-                    top: 14,
-                    child: Text(
-                    item.day.toString()))
-                ],
-              ),
-              title: Row(
-                children: [
-                  Text(item.category),
-                  const SizedBox(width: 8.0),
-                  Icon(item.icon.toIcon(),
-                  color: item.color.toColor(),
+                  SlidableAction(
+                    onPressed: (context){
+                      Navigator.pushNamed(
+                        context, 
+                        'add_expenses',
+                        arguments: item
+                      );
+                    },
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    icon: Icons.edit,
+                    label: 'Editar',
                   )
                 ],
               ),
-              subtitle: Text(item.comment),
-              trailing: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    getAmoutFormat(item.amount),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
+              child: ListTile(
+                leading: Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: [
+                    const Icon(
+                      Icons.calendar_today,
+                      // color: item.color.toColor(),
+                      size: 35.0,
                     ),
-                  ),
-                  Text('${(100 * item.amount / totalExp).toStringAsFixed(2)}%',
-                 style: const TextStyle(
-                  fontSize: 11.0
-                 ), 
-                )
-                ],
+                    Positioned(
+                      top: 14,
+                      child: Text(
+                      item.day.toString()))
+                  ],
+                ),
+                title: Row(
+                  children: [
+                    Text(item.category),
+                    const SizedBox(width: 8.0),
+                    Icon(item.icon.toIcon(),
+                    color: item.color.toColor(),
+                    )
+                  ],
+                ),
+                subtitle: Text(item.comment),
+                trailing: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      getAmoutFormat(item.amount),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text('${(100 * item.amount / totalExp).toStringAsFixed(2)}%',
+                   style: const TextStyle(
+                    fontSize: 11.0
+                   ), 
+                  )
+                  ],
+                ),
               ),
             );
           },

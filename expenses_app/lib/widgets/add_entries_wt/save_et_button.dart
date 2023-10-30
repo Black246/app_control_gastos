@@ -6,10 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
-class SaveButton extends StatelessWidget {
+class SaveEntriesButton extends StatelessWidget {
   final CombinedModel cModel;
-  final bool hasData;
-  const SaveButton({super.key, required this.cModel, required this.hasData});
+  const SaveEntriesButton({super.key, required this.cModel});
 
   @override
   Widget build(BuildContext context) {
@@ -19,34 +18,25 @@ class SaveButton extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           // Guardamos la información al dar tap al boton guardar
-          if (cModel.amount != 0.00 && cModel.link != null) { // Validamos que la información no valla vacia
-            (hasData)
-            ? exProvider.updateExpense(cModel) // Si hasData trae información la actualizamos
-            : exProvider.addNewExpense(cModel); // De lo contrario guardamos
-
+          if (cModel.amount != 0.00) {
+            // Validamos que la información no valla vacia
+            exProvider.addNewEntries(cModel);
             Fluttertoast.showToast(
-              msg: (hasData) ? '¡Gasto editado con exito!': '¡Se agrego un nuevo gasto!',
+              msg: '¡Se agrego un nuevo ingreso!',
               backgroundColor: Colors.green,
             );
             uiProvider.bnbIndex = 0;
             Navigator.pop(context);
           } else if (cModel.amount == 0.00) {
             Fluttertoast.showToast(
-                msg: '¡No olvides agregar un monto!',
-                backgroundColor: Colors.red);
-          } else {
-            Fluttertoast.showToast(
-                msg: '¡No olvides seleccionar una categoría!',
+                msg: '¡No olvides agregar un ingreso!',
                 backgroundColor: Colors.red);
           }
         },
         child: SizedBox(
           height: 70.0,
           width: 170.0,
-          child: Constants.customButton(
-            Colors.red, 
-            Colors.transparent, 
-            (hasData) ? 'Editar' : 'Guardar'),
+          child: Constants.customButton(Colors.green, Colors.transparent, 'Guardar'),
         ));
   }
 }

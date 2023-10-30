@@ -14,10 +14,19 @@ class AddExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CombinedModel cModel = CombinedModel();
+    bool hasData = false;
+    final editCModel = ModalRoute.of(context)!.settings.arguments as CombinedModel?; // Madamos los argumetos para que la información llegue cargada
+
+    // Si la información no esta vacia enviamos la información que estaba cargada
+    if (editCModel != null) {
+      cModel = editCModel;
+      hasData = true;
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar Gasto'),
+        // Si hasData trae información de gasto se cambia el titulo de lo contrario queda igual "Agregar gasto"
+        title: (hasData) ? const Text('Editar gasto') : const Text('Agregar Gasto'),
         elevation: 0.0,
       ),
       body: Column(
@@ -38,7 +47,10 @@ class AddExpenses extends StatelessWidget {
                   CommentBox(cModel: cModel),
                   Expanded(
                       child: Center(
-                         child: SaveButton(cModel: cModel)
+                         child: SaveButton(
+                          cModel: cModel,
+                          hasData: hasData,
+                      )
                     )
                   ),
                 ],

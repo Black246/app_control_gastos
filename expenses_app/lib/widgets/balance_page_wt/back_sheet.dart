@@ -1,13 +1,20 @@
+import 'package:expenses_app/pages/entries_details.dart';
 import 'package:expenses_app/pages/expenses_details.dart';
+import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:expenses_app/utils/constants.dart';
+import 'package:expenses_app/utils/math_operations.dart';
 import 'package:expenses_app/utils/page_animation_routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BackSheet extends StatelessWidget {
   const BackSheet({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final eList = context.watch<ExpensesProvider>().eList;
+    final etList = context.watch<ExpensesProvider>().etList;
+
     headers(String name, String amount, Color color) {
       return Column(
         children: [
@@ -32,7 +39,21 @@ class BackSheet extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          headers('Ingresos', '\$ 3,500.00', Colors.green),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+               PagesAnimationRoutes(
+                widget: const EntriesDetails(), 
+                ejex: -0.5, 
+                ejey: -0.5
+                )
+              );
+            },
+            child: headers(
+              'Ingresos',
+              getAmoutFormat(getSumOfEntries(etList)), // Le damos formato y recibimos la sumatoria de los ingresos
+              Colors.green
+            )),
           const VerticalDivider(
             thickness: 2.0,
           ),
@@ -48,7 +69,9 @@ class BackSheet extends StatelessWidget {
               );
             },
             child: headers(
-              'Gastos', '\$ 1,500.00', Colors.red
+              'Gastos', 
+              getAmoutFormat(getSumOfExpenses(eList)), // Le damos formato y recibimos la sumatoria de los gastos
+              Colors.red
           )),
         ],
       ),

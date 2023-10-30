@@ -1,10 +1,13 @@
 import 'dart:math';
+import 'package:expenses_app/providers/expenses_provider.dart';
+import 'package:expenses_app/utils/math_operations.dart';
 import 'package:expenses_app/widgets/balance_page_wt/back_sheet.dart';
 import 'package:expenses_app/widgets/balance_page_wt/custom_fab.dart';
 import 'package:expenses_app/widgets/balance_page_wt/front_sheet.dart';
 import 'package:expenses_app/widgets/balance_page_wt/month_selector.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BalancePage extends StatefulWidget {
   const BalancePage({Key? key}) : super(key: key);
@@ -43,24 +46,28 @@ class _BalancePageState extends State<BalancePage> {
 
   @override
   Widget build(BuildContext context) {
+    final eList = context.watch<ExpensesProvider>().eList;
+    final etList = context.watch<ExpensesProvider>().etList;
+
+
     return Scaffold(
       floatingActionButton: const CustomFAB(),
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
-          const SliverAppBar(
+          SliverAppBar(
             elevation: 0.0,
             expandedHeight: 150.0,
             flexibleSpace: FlexibleSpaceBar(
               background: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  MonthSelector(),
+                  const MonthSelector(),
                   Text(
-                    '\$ 2,500.000',
-                    style: TextStyle(fontSize: 30.0, color: Colors.green),
+                    getBalance(eList, etList),
+                    style: const TextStyle(fontSize: 30.0, color: Color.fromARGB(255, 62, 174, 248)),
                   ),
-                  Text(
+                  const Text(
                     'Balance',
                     style: TextStyle(fontSize: 14.0),
                   )

@@ -43,13 +43,13 @@ class FrontSheet extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(50),
+                    padding: const EdgeInsets.all(40),
                     child: Image.asset('assets/No_data.png'),
                   ),
                   const Text(
                     'No tienes gastos este mes, agrega uno aquí 👇',
                     maxLines: 1,
-                    style: TextStyle(fontSize: 15.0, letterSpacing: 1.3),
+                    style: TextStyle(fontSize: 14.0, letterSpacing: 1.0),
                   )
                 ],
               ));
