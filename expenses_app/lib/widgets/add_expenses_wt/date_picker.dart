@@ -1,3 +1,5 @@
+// En este archivo creamos el componente para seleccionar la fecha en agregar gasto
+
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:flutter/material.dart';
 

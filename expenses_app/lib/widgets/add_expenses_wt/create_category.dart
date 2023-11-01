@@ -1,12 +1,14 @@
+// En este archivo es donde creamos y editamos las categorias
+
 import 'package:expenses_app/models/features_model.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:expenses_app/utils/constants.dart';
 import 'package:expenses_app/utils/icon_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_material_color_picker/flutter_material_color_picker.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:provider/provider.dart';
 import 'package:expenses_app/utils/utils.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CreateCategory extends StatefulWidget {
   final FeaturesModel fModel;
@@ -43,57 +45,81 @@ class _CreateCategoryState extends State<CreateCategory> {
 
     _addCategory() {
       if (contain.isNotEmpty) {
-        Fluttertoast.showToast(
-            msg: '¡Ya existe esa Categoría!',
-            backgroundColor: Colors.red,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                child: const Text('¡Ya existe esta categoría!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0))),
+            duration: const Duration(seconds: 2));
       } else if (widget.fModel.category.isNotEmpty) {
         exProvider.addNewFeature(widget.fModel);
-        Fluttertoast.showToast(
-            msg: '¡Categoría creada con exito!',
-            backgroundColor: Colors.green,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(20)),
+                child: const Text('¡Categoría creada con exito!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0))),
+            duration: const Duration(seconds: 2));
         Navigator.pop(context);
       } else {
-        Fluttertoast.showToast(
-            msg: '¡No olvides nombrar una categoría!',
-            backgroundColor: Colors.red,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                child: const Text('¡No olvides nombrar una categoría!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0))),
+            duration: const Duration(seconds: 2));
       }
     }
 
     _editCategory() {
       if (widget.fModel.category.toLowerCase() == stcCategory.toLowerCase()) {
         exProvider.updateFeatures(widget.fModel);
-        Fluttertoast.showToast(
-            msg: '¡Categoría editada con exito!',
-            backgroundColor: Colors.green,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.circular(20)),
+                child: const Text('¡Categoría creada con exito!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0))),
+            duration: const Duration(seconds: 2));
         Navigator.pop(context);
       } else if (contain.isNotEmpty) {
-        Fluttertoast.showToast(
-            msg: '¡Ya existe esa Categoría!',
-            backgroundColor: Colors.red,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                child: const Text('¡Ya existe esta categoría!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0))),
+            duration: const Duration(seconds: 2));
       } else if (widget.fModel.category.isNotEmpty) {
         exProvider.updateFeatures(widget.fModel);
-        Fluttertoast.showToast(
-            msg: '¡Categoría editada con exito!',
-            backgroundColor: Colors.green,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                  color: Colors.green, borderRadius: BorderRadius.circular(20)),
+              child: const Text('¡Categoría editada con exito!',
+                  style: TextStyle(color: Colors.white, fontSize: 16.0)),
+            ),
+            duration: const Duration(seconds: 2));
         Navigator.pop(context);
       } else {
-        Fluttertoast.showToast(
-            msg: '¡No olvides nombrar una categoria!',
-            backgroundColor: Colors.red,
-            fontSize: 20.0,
-            gravity: ToastGravity.CENTER);
+        showToastWidget(
+            Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                child: const Text('¡No olvides nombrar una categoría!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0))),
+            duration: const Duration(seconds: 2));
       }
     }
 

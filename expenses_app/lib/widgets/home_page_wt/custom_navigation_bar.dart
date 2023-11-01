@@ -1,3 +1,5 @@
+// En este archivo creamos la barra de navegacion inferior que aparece en la pagina de inicio
+
 import 'package:expenses_app/providers/ui_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

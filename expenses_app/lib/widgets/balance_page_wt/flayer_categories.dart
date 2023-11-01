@@ -1,3 +1,5 @@
+// En este archivo creamos el componente en donde agrupamos las categorias y la mostramos en el inicio de la app "Categoria de gasto"
+
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:expenses_app/utils/math_operations.dart';
@@ -15,18 +17,15 @@ class FlayerCategories extends StatelessWidget {
     List<CombinedModel> limitList = [];
     bool hasLimit = false;
 
-    // Con esta condicion limitamos mostrar todas las categorias 
-    if(gList.length >= 6) {
+    // Con esta condicion limitamos mostrar todas las categorias
+    if (gList.length >= 6) {
       limitList = gList.sublist(0, 5); // Solo mostramos 5
       hasLimit = true;
     }
 
-    if(limitList.length == 5){
+    if (limitList.length == 5) {
       limitList.add(CombinedModel(
-        category: 'Más...',
-        icon: 'add_circle_outline',
-        color: '#edf5ef'
-      ));
+          category: 'Más...', icon: 'add_circle_outline', color: '#edf5ef'));
     }
 
     return Row(
@@ -37,17 +36,13 @@ class FlayerCategories extends StatelessWidget {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: (hasLimit) ? limitList.length : gList.length,
-            itemBuilder: (_, i){
+            itemBuilder: (_, i) {
               var item = gList[i];
               if (hasLimit == true) item = limitList[i];
 
               return GestureDetector(
                 onTap: (() {
-                  Navigator.pushNamed(
-                    context, 
-                    'cat_details',
-                    arguments: item
-                  );
+                  Navigator.pushNamed(context, 'cat_details', arguments: item);
                 }),
                 child: ListTile(
                   dense: true,
@@ -60,15 +55,12 @@ class FlayerCategories extends StatelessWidget {
                   title: Text(
                     item.category,
                     maxLines: 1,
-                    overflow: TextOverflow.ellipsis, // Pone 3 puntos cuando el texto es muy largo
+                    overflow: TextOverflow
+                        .ellipsis, // Pone 3 puntos cuando el texto es muy largo
                     style: const TextStyle(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.bold
-                    ),
+                        fontSize: 12.0, fontWeight: FontWeight.bold),
                   ),
-                  trailing: Text(
-                    getAmoutFormat(item.amount)
-                  ),
+                  trailing: Text(getAmoutFormat(item.amount)),
                 ),
               );
             },

@@ -1,3 +1,5 @@
+// En este archivo creamos el boton de + que aparece al inicio en donde estan las opciones de agregar un igreso o gasto
+
 import 'package:expenses_app/pages/add_entries.dart';
 import 'package:expenses_app/pages/add_expense.dart';
 import 'package:expenses_app/utils/page_animation_routes.dart';

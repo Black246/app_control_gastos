@@ -1,3 +1,5 @@
+// En este archivo creamos las categorias que vienen por defecto en la app
+
 import 'package:expenses_app/models/features_model.dart';
 
 class CategoryList {

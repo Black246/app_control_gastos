@@ -1,3 +1,5 @@
+// En esta pagina configuramos el balance principal ese que aparece en la pagina de inicio
+
 import 'dart:math';
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:expenses_app/utils/math_operations.dart';

@@ -1,3 +1,5 @@
+// Modelo de ingresos
+
 import 'dart:convert';
 
 EntriesModel entriesModelFromJson(String str) => EntriesModel.fromJson(json.decode(str));

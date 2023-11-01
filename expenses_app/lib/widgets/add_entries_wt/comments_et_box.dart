@@ -1,3 +1,5 @@
+// En este archivo creamos el componente para los comentarios que aparece en agregar ingreso
+
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:flutter/material.dart';
 

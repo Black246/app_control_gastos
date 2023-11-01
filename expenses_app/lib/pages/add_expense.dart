@@ -1,3 +1,5 @@
+// En esta pagina es donde creamos un gasto (La parte visual)
+
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/bs_category.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/bs_number_keyboard.dart';

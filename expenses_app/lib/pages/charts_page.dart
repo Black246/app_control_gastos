@@ -1,3 +1,5 @@
+// Esta es la pagina de graficos
+
 import 'package:flutter/material.dart';
 
 class ChartsPage extends StatelessWidget {

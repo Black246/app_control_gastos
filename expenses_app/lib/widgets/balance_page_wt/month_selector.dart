@@ -1,3 +1,5 @@
+// En este archivo creamos el selector de mes que aparece en la parte superior
+
 import 'package:expenses_app/providers/ui_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

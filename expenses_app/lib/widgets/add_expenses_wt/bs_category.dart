@@ -1,3 +1,5 @@
+// En este archivo creamos el componente que contiene a las categorias y las opciones de crear y editar las categorias
+
 import 'package:expenses_app/widgets/add_expenses_wt/admin_category.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/create_category.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +44,7 @@ class _BSCategoryState extends State<BSCategory> {
     bool hasData = false;
 
     
-    if(widget.cModel.category != 'Selecciona Categoría'){
+    if(widget.cModel.category != 'Selecciona una categoría'){
       hasData = true;
     }
    

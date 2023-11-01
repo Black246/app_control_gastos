@@ -1,4 +1,5 @@
 // En esta pagina mostramos los detalles de las categorias
+
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:expenses_app/utils/constants.dart';

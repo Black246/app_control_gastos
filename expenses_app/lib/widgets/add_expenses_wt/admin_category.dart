@@ -1,9 +1,10 @@
+// En este archivo es donde creamos la categoria
+
 import 'package:expenses_app/models/features_model.dart';
 import 'package:expenses_app/utils/constants.dart';
 import 'package:expenses_app/widgets/add_expenses_wt/create_category.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:expenses_app/utils/utils.dart';
 

@@ -1,3 +1,5 @@
+// En esta pagina es donde creamos un ingreso (La parte visual)
+
 import 'package:expenses_app/models/combined_model.dart';
 import 'package:expenses_app/widgets/add_entries_wt/comments_et_box.dart';
 import 'package:expenses_app/widgets/add_entries_wt/date_et_picker.dart';

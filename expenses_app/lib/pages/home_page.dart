@@ -1,3 +1,5 @@
+// Esta es la pagina del HOME
+
 import 'package:expenses_app/pages/balance_page.dart';
 import 'package:expenses_app/pages/charts_page.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';

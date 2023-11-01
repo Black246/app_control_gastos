@@ -1,3 +1,5 @@
+// En este archivo creamos el container principal de la pagina de inicio
+
 import 'package:expenses_app/utils/constants.dart';
 import 'package:expenses_app/widgets/balance_page_wt/flayer_skin.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
@@ -44,7 +46,7 @@ class FrontSheet extends StatelessWidget {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(40),
-                    child: Image.asset('assets/No_data.png'),
+                    child: Image.asset('assets/No_data.png'), // Esta es la imagen que mostramos cuando no hay gastos
                   ),
                   const Text(
                     'No tienes gastos este mes, agrega uno aquí 👇',

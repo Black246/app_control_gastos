@@ -1,3 +1,5 @@
+// Modelo de listas combinadas
+
 import 'dart:convert';
 
 CombinedModel combinedModelFromJson(String str) => CombinedModel.fromJson(json.decode(str));
@@ -11,7 +13,7 @@ class CombinedModel {
         this.year  = 0,
         this.month = 0,
         this.day   = 0,
-        this.category = 'Selecciona Categoría',
+        this.category = 'Selecciona una categoría',
         this.color = '',
         this.icon = '',
         this.comment = '',

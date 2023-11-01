@@ -1,3 +1,5 @@
+// En este archivo mostramos la sumatoria de los gastos e ingresos que aparecen en el inicio
+
 import 'package:expenses_app/pages/entries_details.dart';
 import 'package:expenses_app/pages/expenses_details.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';

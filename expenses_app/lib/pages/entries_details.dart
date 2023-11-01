@@ -1,3 +1,5 @@
+// En esta pagina mostramos los detalles de los ingresos
+
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

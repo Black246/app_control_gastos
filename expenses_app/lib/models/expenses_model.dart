@@ -1,3 +1,5 @@
+// Modelo de gastos
+
 import 'dart:convert';
 
 ExpensesModel expensesModelFromJson(String str) => ExpensesModel.fromJson(json.decode(str));
