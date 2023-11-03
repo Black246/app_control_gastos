@@ -28,6 +28,8 @@ class FlayerCategories extends StatelessWidget {
           category: 'Más...', icon: 'add_circle_outline', color: '#edf5ef'));
     }
 
+    gList.sort((a, b) => b.amount.compareTo(a.amount)); // Con el metodo sort ordenamos la lista "gList" de menor a mayor
+
     return Row(
       children: [
         Expanded(

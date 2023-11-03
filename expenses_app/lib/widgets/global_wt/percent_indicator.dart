@@ -19,14 +19,7 @@ class PercentLinear extends StatelessWidget {
       lineHeight: 16.0,
       percent: percent,
       barRadius: const Radius.circular(10.0),
-      //progressColor: color,
-      linearGradient: LinearGradient(
-        colors: [
-          Colors.grey,
-          color,
-          color
-        ]
-      ),
+      progressColor: color,
       center: Text(
         '${(percent * 100).toStringAsFixed(2)}%',
         style: const TextStyle(

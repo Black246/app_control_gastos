@@ -46,17 +46,17 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
 
   @override
   Widget build(BuildContext context) {
-    //Hacemos el llamado a nuestras listas
+    // Hacemos el llamado a nuestras listas
     final exProvider = context.read<ExpensesProvider>();
     final uiProvider = context.read<UIProvider>();
     cList = context.watch<ExpensesProvider>().allItemsList;
 
     double totalExp = 0.0;
 
-    //Mapeamos mi cList y por cada elemento que venga de amount lo va a sumar; el valor inicail va a ser 0
+    // Mapeamos mi cList y por cada elemento nuevo que venga de amount se suma; el valor inicail va a ser 0
     totalExp = cList.map((e) => e.amount).fold(0.0, (a, b) => a + b);
 
-    // Con esta condicion controlamos que nuestro total de ingresos no se valla hacia a la derecha y se pierda
+    // Con esta condicion controlamos que nuestro total de gastos no se valla hacia a la derecha y se pierda
     if (_offset > 0.85) _offset = 0.85;
 
     return Scaffold(
@@ -72,7 +72,9 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
               title: Align(
                   alignment: Alignment(_offset,
                       1), // Con esta propiedad desplazamos el total de nuestros gastos hacia la parte superior derecha
-                  child: Text(getAmoutFormat(totalExp))),
+                  child: Text(getAmoutFormat(totalExp),
+                    style: const TextStyle(color: Colors.red),
+                  )),
               centerTitle: true,
               background: const Align(
                 alignment: AlignmentDirectional.bottomCenter,

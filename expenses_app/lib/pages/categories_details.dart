@@ -26,13 +26,9 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
     final cModel = ModalRoute.of(context)!.settings.arguments as CombinedModel?;
 
     // Creamos esta variable para pasarla al porcentaje de entradas
-    var totalEt = getAmoutFormat(
-      getSumOfEntries(etList)
-    );
+    var totalEt = getAmoutFormat(getSumOfEntries(etList));
 
-    var totalExp = getAmoutFormat(
-      getSumOfExpenses(eList)
-    );
+    var totalExp = getAmoutFormat(getSumOfExpenses(eList));
 
     cList = cList.where(((e) => e.category == cModel!.category)).toList();
 
@@ -42,21 +38,19 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
         slivers: [
           SliverAppBar(
             expandedHeight: 200.0,
-            title: Text(
-              cModel!.category,
-              style: TextStyle(
-                color: cModel.color.toColor()
-              )
-            ),
+            title: Text(cModel!.category,
+                style: const TextStyle(
+                    // color: cModel.color.toColor()
+                    )),
             actions: [
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: Text(
                     getAmoutFormat(cModel.amount),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
-                      color: cModel.color.toColor()
+                      // color: cModel.color.toColor()
                     ),
                   ),
                 ),
@@ -72,11 +66,11 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         PercentCircular(
-                          percent: cModel.amount / getSumOfEntries(etList), 
-                          radius: 70, 
+                          percent: cModel.amount / getSumOfEntries(etList),
+                          radius: 70,
                           color: Colors.green,
                           arcType: ArcType.HALF,
-                          ),
+                        ),
                         Text(
                           'Absorbe de tus Ingresos:\n$totalEt',
                           style: const TextStyle(
@@ -90,11 +84,11 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         PercentCircular(
-                          percent: cModel.amount / getSumOfExpenses(eList), 
-                          radius: 70, 
+                          percent: cModel.amount / getSumOfExpenses(eList),
+                          radius: 70,
                           color: Colors.red,
                           arcType: ArcType.HALF,
-                          ),
+                        ),
                         Text(
                           'Representa de tus Gastos:\n$totalExp',
                           style: const TextStyle(
@@ -109,7 +103,6 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
               ),
             ),
           ),
-
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.only(top: 15.0),
@@ -117,41 +110,39 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
               color: Theme.of(context).scaffoldBackgroundColor,
               child: Container(
                 decoration: Constants.sheetBoxDecoration(
-                  Theme.of(context).primaryColorDark
-                ),
+                    Theme.of(context).primaryColorDark),
               ),
             ),
           ),
-
-          SliverList(delegate: SliverChildBuilderDelegate(
-            (context, i) {
-              var item = cList[i];
-              return  ListTile(
-                leading: Stack(
-                  alignment: AlignmentDirectional.center,
-                  children: [
-                    const Icon(Icons.calendar_today, size: 35.0),
-                    Positioned(
-                      top: 13,
-                      child: Text(item.day.toString()),
-                    )
-                  ],
+          SliverList(
+              delegate: SliverChildBuilderDelegate((context, i) {
+            var item = cList[i];
+            return ListTile(
+              leading: Stack(
+                alignment: AlignmentDirectional.center,
+                children: [
+                  const Icon(Icons.calendar_today, size: 35.0),
+                  Positioned(
+                    top: 13,
+                    child: Text(item.day.toString()),
+                  )
+                ],
+              ),
+              title: PercentLinear(
+                percent: item.amount /
+                    cModel
+                        .amount, // Dividimos la cantidad de nuestra categoria "item.amount" por la cantidad total "cModel.amount"
+                color: item.color.toColor(),
+              ),
+              trailing: Text(
+                getAmoutFormat(item.amount),
+                style: const TextStyle(
+                  letterSpacing: 1.2,
+                  fontWeight: FontWeight.bold,
                 ),
-                title: PercentLinear(
-                  percent: item.amount / cModel.amount, // Dividimos la cantidad de nuestra categoria "item.amount" por la cantidad total "cModel.amount"
-                  color: item.color.toColor(),
-                ),
-                trailing: Text(
-                  getAmoutFormat(item.amount),
-                  style: const TextStyle(
-                    letterSpacing: 1.2,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
-            },
-            childCount: cList.length
-          ))
+              ),
+            );
+          }, childCount: cList.length))
         ],
       ),
     );

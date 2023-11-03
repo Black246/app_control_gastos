@@ -23,15 +23,19 @@ class SaveEntriesButton extends StatelessWidget {
           if (cModel.amount != 0.00) {
             // Validamos que la información no valla vacia
             exProvider.addNewEntries(cModel);
+
             showToastWidget(
-                Container(
-                    padding: const EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: const Text('¡Ingreso agregado exitosamente!',
-                        style: TextStyle(color: Colors.white, fontSize: 16.0))),
-                duration: const Duration(seconds: 2));
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.green,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Text('¡Se agrego un nuevo ingreso!',
+                    style: TextStyle(color: Colors.white, fontSize: 16.0)),
+              ),
+              duration: const Duration(seconds: 2),
+            );
             uiProvider.bnbIndex = 0;
             Navigator.pop(context);
           } else if (cModel.amount == 0.00) {

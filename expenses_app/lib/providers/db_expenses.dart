@@ -94,4 +94,17 @@ class DBExpenses {
     : [];
     return eList;
   }
+
+  Future<int> updateEntries(EntriesModel exp) async {
+    final db = await database;
+    final response = db.update('Entries', exp.toJson(),
+    where: 'id = ?', whereArgs: [exp.id]);
+    return response;
+  }
+
+  Future<int> deleteEntries(int id) async {
+    final db = await database;
+    final response = db.delete('Entries', where: 'id = ?', whereArgs: [id]);
+    return response;
+  }  
 }

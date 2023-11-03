@@ -18,7 +18,7 @@ class AddEntries extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agregar nuevo ingreso'),
+        title: const Text('Agregar ingreso'),
         elevation: 0.0,
       ),
       body: Column(
@@ -37,10 +37,7 @@ class AddEntries extends StatelessWidget {
                   DateEntriesPicker(cModel: cModel),
                   CommentEntriesBox(cModel: cModel),
                   Expanded(
-                      child: Center(
-                         child: SaveEntriesButton(cModel: cModel)
-                    )
-                  ),
+                      child: Center(child: SaveEntriesButton(cModel: cModel))),
                 ],
               ),
             ),

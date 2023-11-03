@@ -18,7 +18,8 @@ class ExpensesProvider extends ChangeNotifier {
   //------------------ Funciones para insertar ----------------------------
 
   //Expenses
-  addNewExpense(CombinedModel cModel) async { //Recibimos un combined model y lo transformamos a un Expenses model
+  addNewExpense(CombinedModel cModel) async {
+    //Recibimos un combined model y lo transformamos a un Expenses model
     var expenses = ExpensesModel(
         link: cModel.link,
         day: cModel.day,
@@ -33,7 +34,8 @@ class ExpensesProvider extends ChangeNotifier {
   }
 
   //Entries
-  addNewEntries(CombinedModel cModel) async { //Recibimos un combined model y lo transformamos a un Expenses model
+  addNewEntries(CombinedModel cModel) async {
+    //Recibimos un combined model y lo transformamos a un Entries model
     var entries = EntriesModel(
         day: cModel.day,
         month: cModel.month,
@@ -91,9 +93,23 @@ class ExpensesProvider extends ChangeNotifier {
         year: cModel.year,
         comment: cModel.comment,
         expense: cModel.amount);
-    await DBExpenses.db.addExpense(expenses);
+    await DBExpenses.db.updateExpense(expenses);
     notifyListeners();
   }
+
+  //Entires
+  // updateEntries(CombinedModel cModel) async {
+  //   //Recibimos un combined model y lo transformamos a un Entires model
+  //   var entries = EntriesModel(
+  //       id: cModel.id, // Aqui si requerimos el id
+  //       day: cModel.day,
+  //       month: cModel.month,
+  //       year: cModel.year,
+  //       comment: cModel.comment,
+  //       entries: cModel.amount);
+  //   await DBExpenses.db.updateEntries(entries);
+  //   notifyListeners();
+  // }
 
   //Feature
   updateFeatures(FeaturesModel features) async {
@@ -106,6 +122,12 @@ class ExpensesProvider extends ChangeNotifier {
   //Expenses
   deleteExpense(int id) async {
     await DBExpenses.db.deleteExpense(id);
+    notifyListeners();
+  }
+
+  //Entries
+  deleteEntries(int id) async {
+    await DBExpenses.db.deleteEntries(id);
     notifyListeners();
   }
 
