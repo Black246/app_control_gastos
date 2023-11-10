@@ -62,7 +62,9 @@ class FlayerCategories extends StatelessWidget {
                     style: const TextStyle(
                         fontSize: 12.0, fontWeight: FontWeight.bold),
                   ),
-                  trailing: Text(getAmoutFormat(item.amount)),
+                  trailing: Text(getAmountFormat(item.amount),
+                    style: const TextStyle(fontWeight: FontWeight.w400),
+                  ),
                 ),
               );
             },

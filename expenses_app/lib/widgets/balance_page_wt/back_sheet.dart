@@ -53,7 +53,7 @@ class BackSheet extends StatelessWidget {
             },
             child: headers(
               'Ingresos',
-              getAmoutFormat(getSumOfEntries(etList)), // Le damos formato y recibimos la sumatoria de los ingresos
+              getAmountFormat(getSumOfEntries(etList)), // Le damos formato y recibimos la sumatoria de los ingresos
               Colors.green
             )),
           const VerticalDivider(
@@ -72,7 +72,7 @@ class BackSheet extends StatelessWidget {
             },
             child: headers(
               'Gastos', 
-              getAmoutFormat(getSumOfExpenses(eList)), // Le damos formato y recibimos la sumatoria de los gastos
+              getAmountFormat(getSumOfExpenses(eList)), // Le damos formato y recibimos la sumatoria de los gastos
               Colors.red
           )),
         ],

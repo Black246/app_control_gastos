@@ -1,5 +1,16 @@
 import 'package:expenses_app/utils/icon_list.dart';
 import 'package:flutter/material.dart';
+export 'package:expenses_app/utils/utils.dart';
+
+
+// Con esta funcion calculamos el total de los dias que trae el mes
+int daysInMonth(int month) {
+  var now = DateTime.now();
+  var lastDay = (month < 12)
+  ? DateTime(now.year, month + 1, 0)
+  : DateTime(now.year + 1, 1, 0);
+  return lastDay.day;
+}
 
 extension ColorExtension on String {
   toColor() {

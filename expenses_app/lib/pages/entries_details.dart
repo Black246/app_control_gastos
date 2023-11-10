@@ -68,7 +68,7 @@ class _EntriesDetailsState extends State<EntriesDetails> {
                   alignment: Alignment(_offset,
                       1), // Con esta propiedad desplazamos el total de nuestros gastos hacia la parte superior derecha
                   child: Text(
-                    getAmoutFormat(totalEntr),
+                    getAmountFormat(totalEntr),
                     style: const TextStyle(color: Colors.green),
                   ),
                 ),
@@ -151,7 +151,7 @@ class _EntriesDetailsState extends State<EntriesDetails> {
                   ),
                   title: Row(
                     children: [
-                      Text(getAmoutFormat(item.entries)),
+                      Text(getAmountFormat(item.entries)),
                       const SizedBox(width: 8.0)
                     ],
                   ),

@@ -1,6 +1,7 @@
 import 'package:expenses_app/pages/add_entries.dart';
 import 'package:expenses_app/pages/add_expense.dart';
 import 'package:expenses_app/pages/categories_details.dart';
+import 'package:expenses_app/pages/expenses_details.dart';
 import 'package:expenses_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         'home': (_) => const HomePage(),
         'add_entries': (_) => const AddEntries(),
         'add_expenses': (_) => const AddExpenses(),
+        'exp_details': (_) => const ExpensesDetails(),
         'cat_details': (_) => const CategoriesDetails(),
       },
     );

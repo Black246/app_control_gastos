@@ -27,6 +27,8 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
   void _listener() {
     setState(() {
       _offset = _scrollController.offset / 100;
+      // Con esta condicion controlamos que nuestro total de gastos no se valla hacia a la derecha y se pierda
+      if (_offset > 0.85) _offset = 0.85;
     });
   }
 
@@ -47,17 +49,21 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
   @override
   Widget build(BuildContext context) {
     // Hacemos el llamado a nuestras listas
+    final dataDay = ModalRoute.of(context)!.settings.arguments as int?; // Aqui recibimos los argumento de PerDayList que es el dia, para mostrar los gastos realizados ese dia
     final exProvider = context.read<ExpensesProvider>();
     final uiProvider = context.read<UIProvider>();
     cList = context.watch<ExpensesProvider>().allItemsList;
 
     double totalExp = 0.0;
 
+    if (dataDay != null){
+      cList = cList.where((e) => e.day == dataDay).toList();
+    }
+
     // Mapeamos mi cList y por cada elemento nuevo que venga de amount se suma; el valor inicail va a ser 0
     totalExp = cList.map((e) => e.amount).fold(0.0, (a, b) => a + b);
 
-    // Con esta condicion controlamos que nuestro total de gastos no se valla hacia a la derecha y se pierda
-    if (_offset > 0.85) _offset = 0.85;
+    cList.sort((a, b) => b.day.compareTo(a.day));
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColorDark,
@@ -72,7 +78,7 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
               title: Align(
                   alignment: Alignment(_offset,
                       1), // Con esta propiedad desplazamos el total de nuestros gastos hacia la parte superior derecha
-                  child: Text(getAmoutFormat(totalExp),
+                  child: Text(getAmountFormat(totalExp),
                     style: const TextStyle(color: Colors.red),
                   )),
               centerTitle: true,
@@ -170,7 +176,7 @@ class _ExpensesDetailsState extends State<ExpensesDetails> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      getAmoutFormat(item.amount),
+                      getAmountFormat(item.amount),
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                       ),

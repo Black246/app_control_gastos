@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
-
 class PercentLinear extends StatelessWidget {
   final double percent;
   final Color color;
@@ -22,9 +21,7 @@ class PercentLinear extends StatelessWidget {
       progressColor: color,
       center: Text(
         '${(percent * 100).toStringAsFixed(2)}%',
-        style: const TextStyle(
-          fontSize: 12.0
-        ),
+        style: const TextStyle(fontSize: 12.0),
       ),
     );
   }
@@ -35,14 +32,25 @@ class PercentCircular extends StatelessWidget {
   final double radius;
   final Color color;
   final ArcType arcType;
-  const PercentCircular({super.key, required this.percent, required this.radius, required this.color, required this.arcType});
+  const PercentCircular(
+      {super.key,
+      required this.percent,
+      required this.radius,
+      required this.color,
+      required this.arcType});
 
   @override
   Widget build(BuildContext context) {
+    var perCent = percent;
+
+    if (perCent > 1) {
+      perCent = 1;
+    }
+
     return CircularPercentIndicator(
       animation: true,
       animationDuration: 1000,
-      percent: percent,
+      percent: perCent,
       radius: radius,
       progressColor: color,
       arcType: arcType,
@@ -50,10 +58,8 @@ class PercentCircular extends StatelessWidget {
       lineWidth: 10.0,
       circularStrokeCap: CircularStrokeCap.round,
       center: Text(
-        '${(percent * 100).toStringAsFixed(0)}%',
-        style: const TextStyle(
-          fontSize: 20.0
-        ),
+        '${(perCent * 100).toStringAsFixed(0)}%',
+        style: const TextStyle(fontSize: 20.0),
       ),
     );
   }

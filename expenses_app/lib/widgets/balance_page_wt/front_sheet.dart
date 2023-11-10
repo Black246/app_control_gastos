@@ -1,6 +1,9 @@
 // En este archivo creamos el container principal de la pagina de inicio
 
 import 'package:expenses_app/utils/constants.dart';
+import 'package:expenses_app/widgets/balance_page_wt/flayer_balance.dart';
+import 'package:expenses_app/widgets/balance_page_wt/flayer_frecuency.dart';
+import 'package:expenses_app/widgets/balance_page_wt/flayer_movements.dart';
 import 'package:expenses_app/widgets/balance_page_wt/flayer_skin.dart';
 import 'package:expenses_app/providers/expenses_provider.dart';
 import 'package:flutter/material.dart';
@@ -33,13 +36,13 @@ class FrontSheet extends StatelessWidget {
                         myWidget: FlayerCategories()),
                     FlayerSkin(
                         myTitle: 'Fecuencia con la que gasto',
-                        myWidget: SizedBox(height: 150.0)),
+                        myWidget: FlayerFrecuency()),
                     FlayerSkin(
                         myTitle: 'Mis movimientos',
-                        myWidget: SizedBox(height: 150.0)),
+                        myWidget: FlayerMovements()),
                     FlayerSkin(
                         myTitle: 'Balance general',
-                        myWidget: SizedBox(height: 150.0)),
+                        myWidget: FlayerBalance()),
                   ])
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -50,7 +53,6 @@ class FrontSheet extends StatelessWidget {
                       'assets/No_data.png',
                       width: double.infinity,
                       height: 210,
-
                     ), // Esta es la imagen que mostramos cuando no hay gastos
                   ),
                   const Text(

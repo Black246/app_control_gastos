@@ -46,6 +46,7 @@ dependencies:
   flutter_slidable: ^3.0.0
   percent_indicator: ^4.2.3
   oktoast: ^3.3.2+1
+  syncfusion_flutter_charts: ^23.1.44
   
 
 

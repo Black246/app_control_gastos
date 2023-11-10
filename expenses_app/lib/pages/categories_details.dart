@@ -26,9 +26,9 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
     final cModel = ModalRoute.of(context)!.settings.arguments as CombinedModel?;
 
     // Creamos esta variable para pasarla al porcentaje de entradas
-    var totalEt = getAmoutFormat(getSumOfEntries(etList));
+    var totalEt = getAmountFormat(getSumOfEntries(etList));
 
-    var totalExp = getAmoutFormat(getSumOfExpenses(eList));
+    var totalExp = getAmountFormat(getSumOfExpenses(eList));
 
     cList = cList.where(((e) => e.category == cModel!.category)).toList();
 
@@ -38,20 +38,19 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
         slivers: [
           SliverAppBar(
             expandedHeight: 200.0,
-            title: Text(cModel!.category,
-                style: const TextStyle(
-                    // color: cModel.color.toColor()
-                    )),
+            title: Text(cModel!.category, style: const TextStyle()),
             actions: [
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(right: 20.0),
                   child: Text(
-                    getAmoutFormat(cModel.amount),
+                    getAmountFormat(cModel.amount),
                     style: const TextStyle(
-                      fontSize: 16.0,
-                      // color: cModel.color.toColor()
-                    ),
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: 0.5
+                        // color: cModel.color.toColor()
+                        ),
                   ),
                 ),
               )
@@ -135,7 +134,7 @@ class _CategoriesDetailsState extends State<CategoriesDetails> {
                 color: item.color.toColor(),
               ),
               trailing: Text(
-                getAmoutFormat(item.amount),
+                getAmountFormat(item.amount),
                 style: const TextStyle(
                   letterSpacing: 1.2,
                   fontWeight: FontWeight.bold,
